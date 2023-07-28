@@ -9,6 +9,6 @@
             {% csrf_token %}
             <input type="submit" value="Delete">
         </form>
-        <a href="{% url 'note_detail', note.pk %}">Cancel</a>
+        <a href="{% url 'note_detail' note.pk %}">Cancel</a>
     </body>
 </html>
