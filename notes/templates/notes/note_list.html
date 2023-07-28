@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Notes App - List</title>
+    </head>
+    <body>
+        <h1>Notes List</h1>
+        <u1>
+            {% for note in notes %}
+            <li><a href="{% url 'note_detail' note.pk %}">{{ note.title }}</a></li>
+            {% endfor %}
+        </u1>
+        <a href="{% url 'note_create' %}">Create New Note</a>
+    </body>
+</html>
