@@ -1,17 +1,20 @@
 from django.shortcuts import render
 from .models import Note
-from .form import NoteForm
+from .forms import NoteForm
+
 
 def note_list(request):
     notes = Note.objects.all()
 
     return render(request, "notes/note_list.html", {"notes": notes})
 
+
 # pk == primary key -> database identifier
 def note_detail(request, pk):
     note = get_object_or_404(Note, pk=pk)
 
-    return render(request, "notes/note_detail.html", {"notes": note}),
+    return (render(request, "notes/note_detail.html", {"notes": note}),)
+
 
 def note_create(request):
     if request.method == "POST":
@@ -24,6 +27,7 @@ def note_create(request):
             form = NoteForm()
 
         return render(request, "notes/note_form.html", {"form": form})
+
 
 def note_update(request, pk):
     note = get_object_or_404(Note, pk=pk)
@@ -38,11 +42,12 @@ def note_update(request, pk):
 
         return render(request, "notes/note_form.html", {"form": form})
 
+
 def note_delete(request, pk):
-    note = get_object_or_404(Note pk=pk)
-    
+    note = get_object_or_404(Note, pk=pk)
+
     if request.method == "POST":
         note.delete()
         return redirect("note_list")
-    
+
     return render(request, "notes/note_confirm_delete.html", {"note": note})
